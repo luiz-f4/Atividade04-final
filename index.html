@@ -12,11 +12,11 @@
         }
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--bg-color, #f4f4f4);
+            color: var(--text-color, #333);
         }
         .header {
-            background-color: #d32f2f;
+            background-color: var(--primary-color, #d32f2f);
             color: white;
             padding: 15px;
             text-align: center;
@@ -24,7 +24,7 @@
         .nav {
             display: flex;
             justify-content: center;
-            background-color: #b71c1c;
+            background-color: var(--primary-color, #b71c1c);
             padding: 10px 0;
         }
         .nav a {
@@ -36,7 +36,7 @@
             transition: background 0.3s;
         }
         .nav a:hover {
-            background-color: #d32f2f;
+            background-color: var(--hover-color, #d32f2f);
             border-radius: 5px;
         }
         .container {
@@ -47,6 +47,14 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .ingredients, .preparation {
+            width: 48%;
+        }
         img {
             width: 100%;
             max-width: 600px;
@@ -54,16 +62,9 @@
             display: block;
             margin: 20px auto;
         }
-        ul {
-            text-align: left;
-            padding-left: 20px;
-        }
-        .hidden {
-            display: none;
-        }
         .btn {
             display: inline-block;
-            background-color: #d32f2f;
+            background-color: var(--primary-color, #d32f2f);
             color: white;
             padding: 10px 20px;
             margin-top: 10px;
@@ -73,27 +74,28 @@
             transition: background 0.3s;
         }
         .btn:hover {
-            background-color: #b71c1c;
+            background-color: var(--hover-color, #b71c1c);
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
         footer {
             text-align: center;
             padding: 15px;
-            background-color: #b71c1c;
+            background-color: var(--primary-color, #b71c1c);
             color: white;
             margin-top: 20px;
         }
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            .nav {
+            .content {
                 flex-direction: column;
-                align-items: center;
             }
-            .nav a {
-                padding: 8px;
+            .ingredients, .preparation {
                 width: 100%;
-                text-align: center;
             }
         }
     </style>
@@ -111,29 +113,47 @@
     <div class="container">
         <h1 id="title">Receita de Lasanha para 10 Pessoas</h1>
         <button class="btn" onclick="changeTitle()">Alterar Título</button>
-        <h2>Ingredientes</h2>
-        <ul id="ingredients">
-            <li>500g de massa para lasanha</li>
-            <li>1kg de carne moída</li>
-            <li>2 cebolas médias picadas</li>
-            <li>4 dentes de alho picados</li>
-            <li>2 latas de molho de tomate</li>
-            <li>500g de queijo mussarela</li>
-            <li>300g de presunto</li>
-            <li>2 colheres de sopa de azeite</li>
-            <li>Sal, pimenta e orégano a gosto</li>
-        </ul>
-        <button class="btn" onclick="toggleIngredients()">Mostrar/Ocultar Ingredientes</button>
-        <h2>Modo de Preparo</h2>
-        <p>1. Em uma panela, aqueça o azeite e refogue a cebola e o alho.</p>
-        <p>2. Adicione a carne moída, tempere com sal e pimenta, e cozinhe até dourar.</p>
-        <p>3. Acrescente o molho de tomate e deixe cozinhar por 15 minutos.</p>
-        <p>4. Em um refratário, monte as camadas da lasanha: massa, molho, presunto, queijo e assim por diante, finalizando com queijo.</p>
-        <p>5. Polvilhe orégano e leve ao forno pré-aquecido a 180°C por 30 minutos ou até dourar.</p>
+
+        <div class="content">
+            <div class="ingredients">
+                <h2>Ingredientes</h2>
+                <ul id="ingredients">
+                    <li>500g de massa para lasanha</li>
+                    <li>1kg de carne moída</li>
+                    <li>2 cebolas médias picadas</li>
+                    <li>4 dentes de alho picados</li>
+                    <li>2 latas de molho de tomate</li>
+                    <li>500g de queijo mussarela</li>
+                    <li>300g de presunto</li>
+                    <li>2 colheres de sopa de azeite</li>
+                    <li>Sal, pimenta e orégano a gosto</li>
+                </ul>
+            </div>
+            <div class="preparation">
+                <h2>Modo de Preparo</h2>
+                <p>1. Em uma panela, aqueça o azeite e refogue a cebola e o alho.</p>
+                <p>2. Adicione a carne moída, tempere com sal e pimenta, e cozinhe até dourar.</p>
+                <p>3. Acrescente o molho de tomate e deixe cozinhar por 15 minutos.</p>
+                <p>4. Em um refratário, monte as camadas da lasanha: massa, molho, presunto, queijo e assim por diante, finalizando com queijo.</p>
+                <p>5. Polvilhe orégano e leve ao forno pré-aquecido a 180°C por 30 minutos ou até dourar.</p>
+            </div>
+        </div>
+
         <h2>Imagem Ilustrativa</h2>
         <img id="lasagnaImg" src="https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg" alt="Imagem de uma lasanha para 10 pessoas">
         <button class="btn" onclick="changeImage()">Alterar Imagem</button>
-        <p>Fonte da receita: <a href="https://www.tudogostoso.com.br" target="_blank">Tudo Gostoso</a></p>
+
+        <div class="controls">
+            <label>Mudar Cor Principal: <input type="color" id="colorPicker" value="#d32f2f" onchange="changeColor()"></label>
+            <label>Escolher Fonte: 
+                <select id="fontPicker" onchange="changeFont()">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                </select>
+            </label>
+            <button class="btn" onclick="toggleDarkMode()">Modo Claro/Escuro</button>
+        </div>
     </div>
     <footer>
         <p>&copy; 2025 Receitas Deliciosas. Todos os direitos reservados.</p>
@@ -144,22 +164,30 @@
             document.getElementById("title").innerText = "Receita Especial de Lasanha";
         }
 
-        function toggleIngredients() {
-            const ingredients = document.getElementById("ingredients");
-            if (ingredients.classList.contains("hidden")) {
-                ingredients.classList.remove("hidden");
-            } else {
-                ingredients.classList.add("hidden");
-            }
-        }
-
         function changeImage() {
             const img = document.getElementById("lasagnaImg");
             if (img.src.includes("FrdumyhYaZY")) {
-                img.src = "https://files.oaiusercontent.com/file-KkR9moEYz5B6SiEjcR7yym?se=2025-03-19T17%3A38%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D57cb8f33-985a-44ef-ae14-99661b96fc12.webp&sig=Q9n3xR5lO4A6n4%2Bl%2B45PFcBrgd9yaeuTqt0jZMCI1Pc%3D";
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/6/6f/Lasagna_%28cropped%29.jpg";
             } else {
-                img.src = "https://files.oaiusercontent.com/file-1ebEFnk5dysCVweveZEGiF?se=2025-03-19T17%3A43%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D34e33cdd-4a46-475c-81b6-a04ccaf21f6e.webp&sig=CmMPX8HOgxRsVErSI9qHqTpCwxR607HAN0U6VgBorWA%3D";
+                img.src = "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg";
             }
+        }
+
+        function changeColor() {
+            const color = document.getElementById("colorPicker").value;
+            document.documentElement.style.setProperty("--primary-color", color);
+            document.documentElement.style.setProperty("--hover-color", color);
+        }
+
+        function changeFont() {
+            const font = document.getElementById("fontPicker").value;
+            document.body.style.fontFamily = font;
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.body.style.backgroundColor === "rgb(20, 20, 20)";
+            document.documentElement.style.setProperty("--bg-color", isDark ? "#f4f4f4" : "#141414");
+            document.documentElement.style.setProperty("--text-color", isDark ? "#333" : "#ffffff");
         }
     </script>
 </body>
